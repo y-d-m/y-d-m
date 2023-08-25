@@ -1,0 +1,44 @@
+# 图的深度优先搜索
+
+优先搜索，简称dfs,全称为depth-first search。是遍历图的一种方法。
+
+特点为不撞南墙不回头。
+
+代码：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int a[1005][1005];
+int vis[1005];
+int n,m,x,y;
+void dfs(int now)
+{
+	vis[now]=1;
+	cout<<now<<' ';
+	for(int i=1;i<=n;i++)
+	{
+		if(a[now][i]==1&&vis[i]==0)
+		{
+			dfs(i);
+		}
+	}
+}
+int main()
+{
+	cin>>n>>m;
+	for(int i=1;i<=m;i++)
+	{
+		cin>>x>>y;
+		b[x][y]=1;
+		b[y][x]=1;
+	}
+	a[1]=1;
+	dfs(1);
+	
+
+	return 0;
+
+}
+```
+
