@@ -1,0 +1,145 @@
+# Bellman-Ford
+
+//文中所有无穷大用@代替
+
+Floyd的时间复杂度太大，要用邻接矩阵，空间太多
+
+所以我们要引进Bellman-Ford
+
+//但是，Bellman-Ford的时间复杂度仍高达O(NM).
+
+## Bellman-Ford注重边
+
+此时，我们将每个边提取出来__松弛__
+
+__三角不等式：`d[to]>d[from]+cost`__
+
+```
+to:边的终点
+
+from:边的起点
+
+cost:边权
+```
+
+如果符合三角不等式，将`d[to]`更新为`d[from]+cost`。
+
+例如：
+
+​                  4                 3                 2
+
+​         ①————②————③————④ 
+
+start:  0                @              @              @
+
+1：    0                 4               @              @
+
+2：    0                 4                7               @
+
+2：    0                 4                7                9
+
+那要做几轮松弛呢？显而易见，是__n-1轮__
+
+就这样，我们就将链式数组每个点到起点的距离都标出来了。
+
+
+
+模板题：P3371
+
+# 【模板】单源最短路径（弱化版）
+
+## 题目背景
+
+本题测试数据为随机数据，在考试中可能会出现构造数据让SPFA不通过，如有需要请移步 [P4779](https://www.luogu.org/problemnew/show/P4779)。
+
+## 题目描述
+
+如题，给出一个有向图，请输出从某一点出发到所有点的最短路径长度。
+
+## 输入格式
+
+第一行包含三个整数 n,m,s，分别表示点的个数、有向边的个数、出发点的编号。
+
+接下来 m 行每行包含三个整数 u,v,w，表示一条 u 到 v 的，长度为 w的边。
+
+## 输出格式
+
+输出一行 n 个整数，第 i个表示 s 到第 i 个点的最短路径，若不能到达则输出 2147483647。
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+4 6 1
+1 2 2
+2 3 2
+2 4 1
+1 3 5
+3 4 3
+1 4 4
+```
+
+### 样例输出 #1
+
+```
+0 2 4 3
+```
+
+## 提示
+
+**Update 2022/07/29：两个点之间可能有多条边，敬请注意。**
+
+对于真正 100%的数据，请移步 [P4779](https://www.luogu.org/problemnew/show/P4779)。请注意，该题与本题数据范围略有不同。
+
+
+样例说明：
+
+![](https://cdn.luogu.com.cn/upload/pic/7641.png)
+
+图片1到3和1到4的文字位置调换
+
+ACcode:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+struct edge
+{
+    int from,to,cost;
+};
+vector<edge> E;
+int N,M,S;
+long long d[10001];
+int main()
+{
+	for(int i=0;i<=10000;i++)
+	{
+		d[i]=2147483647;
+	}
+	cin>>N>>M>>S;
+	d[S]=0;
+    for(int i=0;i<=M-1;i++)
+    {
+        edge e;
+        int u,v,w;
+        cin>>u>>v>>w;
+        e={u,v,w};
+        E.push_back(e);
+    }
+    for(int k=0;k<=N-2;k++)
+	{
+	    for(int i=0;i<E.size();i++)
+		{
+		    int from=E[i].from,to=E[i].to,cost=E[i].cost;
+		    if(d[to]>d[from]+cost) d[to]=d[from]+cost;
+		}
+	}
+	for(int i=1;i<=N;i++)
+	{
+		cout<<d[i]<<' ';
+	}
+}
+```
+
+注意：如果初始值设为2147483647，那么如果加边权会越界，所以将d数组设为`long long`类型
