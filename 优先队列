@@ -1,0 +1,22 @@
+# 优先队列
+
+创建方法：
+
+```cpp
+priority_queue<int>,greater<int> > q;
+```
+
+或
+
+```cpp
+priority_queue<int>,less<int> > q; 
+```
+
+推进：`q.push()`
+
+判空：`q.empty()`
+
+头部：`q.top()`
+
+弹出：`q.pop()`
+
