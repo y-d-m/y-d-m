@@ -1,0 +1,73 @@
+# map
+
+C++中的map提供的是一种键值对容器，里面的数据都是成对出现的。
+
+每一对中的第一个值称为关键字(key)，每个关键字只能在map里出现一次；第二个称之为该关键字的对应值。
+
+### like this:
+
+|   key   | value    |
+| :-----: | -------- |
+| 1120217 | Nikilesh |
+| 1120236 | Navneet  |
+| 1120250 | Vikas    |
+| 1120255 | Lewis    |
+
+```cpp
+#include <map>
+map<int,string> person;//创建map
+
+person[3]="Jerry"//创建了key为3,value为"jerry"的键值对，加入person
+
+int n=maps.erase("123");//是否删除
+
+maps.size();//返回map对数
+
+map<string,int>::iterator it;
+it=maps.find("123");//迭代器
+```
+
+for example:
+
+| key   | value |
+| ----- | ----- |
+| Lewis | 95    |
+| Leo   | 94    |
+| Vikas | 96    |
+
+```cpp
+#include <map>
+#include <iostream>
+using namespace std;
+int main()
+{
+    map<string,int> m;
+    m["Lewis"]=95;
+    m["Leo"]=94;
+    m["Vikas"]=96;
+    cout<<m["Lewis"];
+}
+```
+
+输出的结果，显而易见，是95.
+
+或者，我们再来一个:
+
+```cpp
+#include <map>
+#include <iostream>
+using namespace std;
+int main()
+{
+    map<string,int> m;
+    m["Lewis"]=95;
+    m["Leo"]=94;
+    m["Vikas"]=96;
+    map<string,int>::iterator it;
+    for(it=m.begin();it!=m.end();it++)
+    {
+        cout<<it->first<<' '<<it->second<<endl;
+    }
+}
+```
+
