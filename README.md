@@ -1,2 +1,2 @@
-我的名字是杨丁卯
-英文名是Lewis
+I am Lewis.
+My Chinese name is 杨丁卯
