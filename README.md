@@ -1,2 +1,2 @@
 I am Lewis.
-My Chinese name is 杨丁卯
+My Chinese name is 杨丁卯.
